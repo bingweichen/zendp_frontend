@@ -1,0 +1,26 @@
+@import '~antd/lib/style/themes/default.less';
+
+.small_table {
+  :global {
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      font-size: 12px;
+    }
+    .ant-table-tbody {
+      > tr.order-table__row--light-yellow {
+        > td {
+          background: #FFF8DC;
+        }
+      }
+
+      > tr.order-table__row--red {
+        >td:first-child {
+          background: #E27C33;
+        }
+      }
+    }
+  }
+}
+
+
+

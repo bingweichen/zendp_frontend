@@ -1,0 +1,188 @@
+@import '~antd/lib/style/themes/default.less';
+
+.pre {
+  margin: 12px 0;
+  padding: 12px 20px;
+  background: @input-bg;
+  box-shadow: @card-shadow;
+}
+
+.page_wrapper {
+  background: white;
+}
+
+.row {
+  //background: white;
+  //padding: 10px 5px;
+}
+
+
+.small_table {
+  :global {
+    .ant-table-thead > tr > th,
+    .ant-table-tbody > tr > td {
+      font-size: 12px;
+    }
+
+
+    .ant-table-tbody {
+      //> tr > td {
+      //  word-wrap: break-word;
+      //  word-break: break-all;
+      //  > div {
+      //    max-width: 220px;
+      //    overflow: hidden;
+      //    text-overflow: ellipsis;
+      //    white-space: nowrap !important;
+      //    border-bottom-color: white;
+      //    border-top-color: white;
+      //    .text-ellipsis {
+      //      max-width: 220px;
+      //      overflow: hidden;
+      //      text-overflow: ellipsis;
+      //      white-space: nowrap !important;
+      //    }
+      //  }
+      //}
+
+      > tr.order-table__row--light-yellow {
+        > td {
+          background: #FFF8DC;
+        }
+      }
+
+      > tr.order-table__row--red {
+        >td:first-child {
+          background: #E27C33;
+        }
+      }
+    }
+  }
+
+
+}
+
+.search_area {
+  display: flex;
+  background: white;
+  border-radius: 3px;
+  padding: 10px;
+  align-items: center;
+}
+
+.search_button {
+  margin: 5px 10px;
+}
+
+
+.form_container {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 2px;
+}
+
+.search_bar_card {
+  background: white;
+  //padding: 10px 20px;
+  //border-radius: 2px;
+}
+
+.order_detail_header {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 2px;
+}
+
+.normal_button {
+  margin: 5px;
+}
+
+
+.steps-content {
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 2px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  //padding-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-action {
+  margin-top: 24px;
+}
+
+//.ant-upload.ant-upload-drag p.ant-upload-drag-icon {
+//  margin-bottom: 20px;
+//}
+//
+//.ant-upload.ant-upload-drag p.ant-upload-text {
+//  margin: 0 0 4px;
+//  color: rgba(0,0,0,.85);
+//  font-size: 16px;
+//}
+//
+//.ant-upload.ant-upload-drag p.ant-upload-hint {
+//  color: rgba(0,0,0,.45);
+//  font-size: 14px;
+//}
+
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  overflow: auto;
+  background-color: @menu-bg;
+}
+
+.spread-icon {
+  //width:50px;
+  //height:50px;
+  //background-color:#F60;
+  //border: 0px none;
+  //border-radius: 5px;
+  position:absolute;
+  float:right;
+  top:5px;
+  right:5px;
+  display:block;
+  cursor: pointer;
+}
+
+.spread-icon-right {
+  //width:50px;
+  //height:50px;
+  //background-color:#F60;
+  //border: 0px none;
+  //border-radius: 5px;
+  position:absolute;
+  float:right;
+  top:5px;
+  right:12px;
+  display:block;
+  cursor: pointer;
+}
+
+
+
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: x-large;
+}
+
+
