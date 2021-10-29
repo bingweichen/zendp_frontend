@@ -9,17 +9,21 @@ import styles from './style.less'
 import { CustomImage } from '../../components/ImagePage/CustomImage'
 import { SearchBar } from '../../components/SearchBar'
 
+import { ObjectsPaginationList } from '../../components/PaginationList'
+
+const category_name = '电影'
+const urlHeader = 'movie'
+
 const MoviePage = (props) => {
 
   const { objectsModel, dispatch } = props
-  const { objects } = objectsModel
 
   useEffect(() => {
     // 获取电影条目
     dispatch({
       type: 'objects/getObjects',
       payload: {
-        category_name: '电影',
+        category_name: category_name,
       },
     })
 
@@ -30,35 +34,28 @@ const MoviePage = (props) => {
 
       <Space direction="vertical">
         <Row gutter={16} justify='space-between'>
-          <SearchBar category_name='电影'/>
+          <SearchBar category_name={category_name}/>
 
           <Button type='primary' onClick={() => {
             history.push({
               pathname: 'addObject',
-              query: { objectCategory: '电影' },
+              query: { objectCategory: category_name },
             })
           }}>
             创建条目
           </Button>
         </Row>
 
-
-        <List
+        <ObjectsPaginationList
+          objectsModel={objectsModel} dispatch={dispatch}
           grid={{ gutter: 16, column: 4 }}
-          pagination={{
-            onChange: page => {
-              console.log(page)
-            },
-            pageSize: 10,
-          }}
-          dataSource={objects}
           renderItem={item => (
             <List.Item key={item.id}>
               <Card
                 className='center'
                 hoverable
                 onClick={() => {
-                  history.push(`/movie/objects/${item.id}`)
+                  history.push(`/${urlHeader}/objects/${item.id}`)
                 }}
               >
                 <div>
@@ -77,6 +74,7 @@ const MoviePage = (props) => {
             </List.Item>
           )}
         />
+
       </Space>
     </div>
 

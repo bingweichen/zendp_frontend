@@ -6,7 +6,8 @@ import { history } from 'umi'
 import { getPageQuery } from '@/utils/utils'
 import { CustomImage } from '../../components/ImagePage/CustomImage'
 import { connect } from 'dva'
-import {globalConstant} from '../../utils/utils'
+import { globalConstant } from '../../utils/utils'
+import { ObjectsPaginationList } from '../../components/PaginationList'
 
 import './style.less'
 
@@ -70,7 +71,6 @@ const SearchObjectPage = (props) => {
                 type: 'objects/handelSearch',
                 payload: {
                   search_str: value,
-                  // category_name: category_name
                 }
               })
             }}
@@ -103,6 +103,7 @@ const SearchObjectPage = (props) => {
 
           <Col span={20} >
               <ObjectList objectsModel={objectsModel} dispatch={dispatch}/>
+
           </Col>
 
         </Row>
@@ -114,74 +115,49 @@ const SearchObjectPage = (props) => {
 
 const ObjectList = (props) => {
   const { objectsModel, dispatch,  } = props
-  const { objects, pageNum, pageSize, total} = objectsModel
 
+  return <ObjectsPaginationList
+    objectsModel={objectsModel} dispatch={dispatch}
+    itemLayout="vertical"
+    size="large"
 
+    renderItem={item => (
+      <List.Item
+        key={item.id} className={styles.basic_main}
+        style={{height: 150}}
+      >
 
-  const paginationProps = {
-    showSizeChanger: false,
-    showQuickJumper: false,
-    showTotal: () => `共${total}条`,
-    pageSize: pageSize,
-    current: pageNum,
-    total: total,
+        <Row justify='space-between'>
+          <Col span={20}>
 
-    onChange: page => {
-      dispatch({
-        type: 'objects/handleChangePageNum',
-        payload: {
-          pageNum: page
-        }
-      })
-
-    },
-  }
-
-  return (
-    <List
-      itemLayout="vertical"
-      size="large"
-      pagination={paginationProps}
-      dataSource={objects}
-
-      renderItem={item => (
-        <List.Item
-          key={item.id} className={styles.basic_main}
-          style={{height: 150}}
-        >
-
-          <Row justify='space-between'>
-            <Col span={20}>
-
-              <Row>
-                <div style={{marginRight:5}}>
+            <Row>
+              <div style={{marginRight:5}}>
                 [{item.category.name}]
-                </div>
+              </div>
 
-                <a href={`/${globalConstant.categoryName2urlMapping[item.category.name]}/objects/${item.id}`}>
+              <a href={`/${globalConstant.categoryName2urlMapping[item.category.name]}/objects/${item.id}`}>
                 {item.name}
-                </a>
-              </Row>
+              </a>
+            </Row>
 
-              <Row align='middle'>
-                <Rate allowHalf value={item.rate} disabled style={{marginRight: 20}}/>
-                {item.rate}
-              </Row>
+            <Row align='middle'>
+              <Rate allowHalf value={item.rate} disabled style={{marginRight: 20}}/>
+              {item.rate}
+            </Row>
 
-              <Row>
-                {item.desc}
-              </Row>
+            <Row>
+              {item.desc}
+            </Row>
 
-            </Col>
+          </Col>
 
-            <Col >
-              <CustomImage src={item.image_url} width={120}/>
-            </Col>
-          </Row>
-        </List.Item>
-      )}
-    />
-  )
+          <Col >
+            <CustomImage src={item.image_url} width={120}/>
+          </Col>
+        </Row>
+      </List.Item>
+    )}
+  />
 }
 
 export default connect(({ objects, loading }) => ({

@@ -10,7 +10,7 @@ import DraggableModal from '../../components/DraggableModal'
 
 import { MovieBigCard } from './components/MovieCard'
 import { history } from 'umi'
-
+import {CommentsPaginationList} from '../../components/PaginationList'
 import '../styles.less'
 
 const layout = {
@@ -92,7 +92,7 @@ const ObjectPage = (props) => {
         </DraggableModal>
 
 
-        <CommentList comments={objectModel.comments}/>
+        <CommentList objectModel={objectModel} dispatch={dispatch} />
       </Col>
 
       <Col span={4}>
@@ -116,36 +116,58 @@ const ObjectPage = (props) => {
 
 // 评论列表
 const CommentList = (props) => {
-  const { comments } = props
-  return (
-    <List
-      itemLayout="vertical"
-      size="large"
-      pagination={{
-        onChange: page => {
-          console.log(page)
-        },
-        pageSize: 3,
-      }}
-      dataSource={comments}
+  const { objectModel, dispatch} = props
 
-      renderItem={item => (
-        <List.Item
-          key={item.id} className={styles.basic_main}
-        >
+  return <CommentsPaginationList
+    objectModel={objectModel} dispatch={dispatch}
 
-          <List.Item.Meta
-            avatar={<Space><Avatar src={item.avatar}/>{item.creator.username}</Space>}
+    itemLayout="vertical"
+    size="large"
 
-            title={<Rate allowHalf defaultValue={item.rate} disabled/>}
-          />
-          {item.desc}
+    renderItem={item => (
+      <List.Item
+        key={item.id} className={styles.basic_main}
+      >
 
-        </List.Item>
-      )}
-    />
-  )
+        <List.Item.Meta
+          avatar={<Space><Avatar src={item.avatar}/>{item.creator.username}</Space>}
 
+          title={<Rate allowHalf defaultValue={item.rate} disabled/>}
+        />
+        {item.desc}
+
+      </List.Item>
+    )}
+
+  />
+  // return (
+  //   <List
+  //     itemLayout="vertical"
+  //     size="large"
+  //     pagination={{
+  //       onChange: page => {
+  //         console.log(page)
+  //       },
+  //       pageSize: 3,
+  //     }}
+  //     dataSource={comments}
+  //
+  //     renderItem={item => (
+  //       <List.Item
+  //         key={item.id} className={styles.basic_main}
+  //       >
+  //
+  //         <List.Item.Meta
+  //           avatar={<Space><Avatar src={item.avatar}/>{item.creator.username}</Space>}
+  //
+  //           title={<Rate allowHalf defaultValue={item.rate} disabled/>}
+  //         />
+  //         {item.desc}
+  //
+  //       </List.Item>
+  //     )}
+  //   />
+  // )
 }
 
 const RateContainer = (props) => {
@@ -172,12 +194,11 @@ const RateContainer = (props) => {
       {...layout}
 
       ref={formRef}
-      name="CreateSkuForm"
+      name="RateForm"
 
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      {/*<Space direction='vertical'>*/}
       <Form.Item
         label="评分" name="rate"
         rules={[{ required: true, message: '请填写评分!' }]}
@@ -200,8 +221,6 @@ const RateContainer = (props) => {
         </Button>
       </Form.Item>
 
-
-      {/*</Space>*/}
     </Form>
 
   )

@@ -105,10 +105,8 @@ const ObjectsModel = {
     },
 
     *getObjects({ payload }, { call, put, select }) {
-      console.log('payload', payload)
       const response = yield call(get_objects, {
         ...payload,
-
       })
       if (response.status !== 400) {
         yield put({

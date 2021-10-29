@@ -13,6 +13,7 @@ import RightContent from '@/components/GlobalHeader/RightContent'
 import { getMatchMenu } from '@umijs/route-utils'
 import logo from '../assets/logo.svg'
 import styles from '../components/GlobalHeader/index.less'
+import '../pages/styles.less'
 
 import {defaultFooterDom} from './BasicLayout'
 

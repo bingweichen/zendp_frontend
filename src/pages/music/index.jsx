@@ -10,6 +10,8 @@ import { CustomImage } from '../../components/ImagePage/CustomImage'
 import { SearchBar } from '../../components/SearchBar'
 
 const category_name = '音乐'
+const urlHeader = 'music'
+import { ObjectsPaginationList } from '../../components/PaginationList'
 
 const MusicPage = (props) => {
 
@@ -21,7 +23,7 @@ const MusicPage = (props) => {
     dispatch({
       type: 'objects/getObjects',
       payload: {
-        category_name: '音乐',
+        category_name: category_name,
       },
     })
 
@@ -45,22 +47,16 @@ const MusicPage = (props) => {
         </Row>
 
 
-        <List
+        <ObjectsPaginationList
+          objectsModel={objectsModel} dispatch={dispatch}
           grid={{ gutter: 16, column: 4 }}
-          pagination={{
-            onChange: page => {
-              console.log(page)
-            },
-            pageSize: 10,
-          }}
-          dataSource={objects}
           renderItem={item => (
             <List.Item key={item.id}>
               <Card
                 className='center'
                 hoverable
                 onClick={() => {
-                  history.push(`/music/objects/${item.id}`)
+                  history.push(`/${urlHeader}/objects/${item.id}`)
                 }}
               >
                 <div>
@@ -72,13 +68,15 @@ const MusicPage = (props) => {
                 </div>
 
                 <div>
-                  {item.rate_score}
+                  {item.rate}
                 </div>
 
               </Card>
             </List.Item>
           )}
         />
+
+
       </Space>
     </div>
 

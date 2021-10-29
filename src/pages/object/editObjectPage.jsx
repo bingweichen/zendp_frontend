@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from 'react'
-import { Button, Form, Input, Select } from 'antd'
+import { Button, Form } from 'antd'
 import { connect } from 'dva'
 
 import { AudioOutlined } from '@ant-design/icons'
 import { getPageQuery } from '@/utils/utils'
 import styles from './style.less'
-import { GridContent } from '@ant-design/pro-layout'
 import { PageHeaderWrapper } from '@ant-design/pro-layout'
 
-import {BasicFormItems} from './components/basicFormItems'
+import { BasicFormItems } from './components/basicFormItems'
+import { ImageFormItemGroup } from '../../components/ImagePage/ImageFormItemGroup'
 
 const layout = {
   labelCol: { span: 4 },
@@ -27,11 +27,10 @@ const UpdateObjectPage = (props) => {
     dispatch({
       type: 'object/getObject',
       payload: {
-        id: objectId
-      }
+        id: objectId,
+      },
     })
   }, [])
-
 
   return <PageHeaderWrapper>
 
@@ -43,18 +42,19 @@ const UpdateObjectPage = (props) => {
 
 // 编辑条目
 const UpdateObjectForm = (props) => {
-  const {objectModel, dispatch} = props
-  const {selectedEle} = objectModel
+  const { objectModel, dispatch } = props
+  const { selectedEle } = objectModel
 
   const formRef = useRef()
 
-  useEffect(()=>{
+  useEffect(() => {
     // 将内容填入
     formRef.current.setFieldsValue({
       name: selectedEle.name,
       category_name: selectedEle.category && selectedEle.category.name,
       desc: selectedEle.desc,
       detail: selectedEle.detail,
+      image_url: selectedEle.image_url,
     })
 
   }, [selectedEle])
@@ -73,8 +73,7 @@ const UpdateObjectForm = (props) => {
     console.log('Failed:', errorInfo)
   }
 
-
-  const basicFormItems = BasicFormItems({disabled:true})
+  const basicFormItems = BasicFormItems({ disabled: true })
 
   return <Form
     {...layout}
@@ -89,6 +88,10 @@ const UpdateObjectForm = (props) => {
     {basicFormItems.category}
     {basicFormItems.desc}
     {basicFormItems.detail}
+
+    <ImageFormItemGroup
+      label='图片地址' name='image_url' image_url={selectedEle.image_url}
+      dispatch={dispatch}/>
 
 
     <Form.Item {...tailLayout}>

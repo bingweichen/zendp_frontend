@@ -5,6 +5,7 @@ import DraggableModal from '../../components/DraggableModal'
 import SelectImageList from '../../components/ImagePage/ImageList'
 import ImageSearchBar from '../../components/ImagePage/SearchBar'
 import { globalConstant } from '../../utils/utils'
+import { CustomUpload } from './CustomUpload'
 
 export const ImageFormItemGroup = (props) => {
 
@@ -14,7 +15,7 @@ export const ImageFormItemGroup = (props) => {
     setImageUrl(props.image_url)
   }, [props.image_url])
 
-  let [isImageModalVisible, setVisible] = useState(false)
+  // let [isImageModalVisible, setVisible] = useState(false)
   let [image_url, setImageUrl] = useState('')
 
   return <>
@@ -36,44 +37,49 @@ export const ImageFormItemGroup = (props) => {
           src={image_url}
           fallback={globalConstant.defaultImageSrc}
         />
-        <Button type="primary" onClick={
-          () => setVisible(true)}>
-          从相册选择
-        </Button>
+
+        <CustomUpload dispatch={dispatch}/>
+
+        {/*<Button type="primary" onClick={*/}
+          {/*() => setVisible(true)}>*/}
+          {/*从相册选择*/}
+        {/*</Button>*/}
+
+
       </Space>
 
-      <DraggableModal
-        width={1200}
-        title={`选择${label}图片`}
-        visible={isImageModalVisible}
-        onCancel={() => setVisible(false)}
-        footer={null}
-      >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <ImageSearchBar dispatch={dispatch} onlyActive={true}/>
+      {/*<DraggableModal*/}
+        {/*width={1200}*/}
+        {/*title={`选择${label}图片`}*/}
+        {/*visible={isImageModalVisible}*/}
+        {/*onCancel={() => setVisible(false)}*/}
+        {/*footer={null}*/}
+      {/*>*/}
+        {/*<div style={{ display: 'flex', alignItems: 'center' }}>*/}
+          {/*<ImageSearchBar dispatch={dispatch} onlyActive={true}/>*/}
 
-          <Button
-            type="primary"
-            icon={<PlusOutlined/>}
-            onClick={() => {
-              let win = window.open(`/setting/product/imagePage`, '_blank')
-              win.focus()
+          {/*<Button*/}
+            {/*type="primary"*/}
+            {/*icon={<PlusOutlined/>}*/}
+            {/*onClick={() => {*/}
+              {/*let win = window.open(`/setting/product/imagePage`, '_blank')*/}
+              {/*win.focus()*/}
 
-            }}>
-            添加图片
-          </Button>
-        </div>
+            {/*}}>*/}
+            {/*添加图片*/}
+          {/*</Button>*/}
+        {/*</div>*/}
 
 
-        <SelectImageList setImageUrlFunc={(imageUrl) => {
-          setImageUrl(imageUrl)
+        {/*<SelectImageList setImageUrlFunc={(imageUrl) => {*/}
+          {/*setImageUrl(imageUrl)*/}
 
-          formRef.current.setFieldsValue({
-            [name]: imageUrl,
-          })
-          setVisible(false)
-        }}/>
-      </DraggableModal>
+          {/*formRef.current.setFieldsValue({*/}
+            {/*[name]: imageUrl,*/}
+          {/*})*/}
+          {/*setVisible(false)*/}
+        {/*}}/>*/}
+      {/*</DraggableModal>*/}
     </Form.Item>
   </>
 }

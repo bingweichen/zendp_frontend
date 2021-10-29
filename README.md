@@ -1,6 +1,9 @@
-# 极简点评
+#  极简点评网
+极简点评网：万物皆可评
 
-
+1. 前端项目地址 https://github.com/bingweichen/zendp_frontend
+2. 后端项目地址 https://github.com/bingweichen/zendp_backend
+3. 网站地址：www.zendp.cn
 
 # Ant Design Pro
 

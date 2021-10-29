@@ -3,6 +3,7 @@ import { Form, Input, Select } from 'antd'
 
 import { AudioOutlined } from '@ant-design/icons'
 import { getPageQuery } from '@/utils/utils'
+import {ImageFormItemGroup} from '../../../components/ImagePage/ImageFormItemGroup'
 
 const CategorySelectFormItem = ({disabled}) => {
   return <Form.Item label="版块" name="category_name">
@@ -40,8 +41,21 @@ export const BasicFormItems = ({disabled}) => {
     detail: <Form.Item label="详细内容" name="detail">
       <Input.TextArea rows={2} showCount maxLength={350} placeholder={'请填写姓名'}/>
     </Form.Item>,
-    image_url: '',
+    // image_url: <Form.Item label={'图片地址'} name={'image_url'}>
+    //   <Input maxLength={500}
+    //     // defaultValue={image_url}
+    //     //      onBlur={(e) => {
+    //     //        setImageUrl(e.target.value)
+    //     //      }}
+    //     //      onPressEnter={(e) => e.target.blur()}
+    //          placeholder="请填写商品图片的地址"
+    //   />
+    // </Form.Item>,
+    // image_url: <ImageFormItemGroup label='图片地址' name='image_url' image_url={company.avatar}
+    //                          dispatch={dispatch}
+    // />,
     tags: '',
   }
 }
+
 

@@ -1,3 +1,12 @@
+/**
+ * 逻辑：
+ *
+ * 1. 获取第一页
+ * 2. 点击分页 更新分页字段， 获取
+ *
+ *
+ */
+
 import { message } from 'antd'
 import { add_object, get_object, update_object } from '../../services/object'
 
@@ -15,7 +24,12 @@ const Model = {
     comments: [],
 
     // 频率模态框
-    isModalVisible: false
+    isModalVisible: false,
+
+    // 评论分页
+    pageSize: 2,
+    pageNum: 1,
+    total: 0,
 
   },
   effects: {
@@ -62,23 +76,59 @@ const Model = {
         })
 
         yield put.resolve({
-          type: 'getCurrentComments',
+          type: 'firstGetComments',
         })
       }
     },
 
-    // 获取当前页面评论列表
-    *getCurrentComments({ payload }, { call, put, select }) {
+    // // 获取当前页面评论列表  、、、
+    // *getCurrentComments({ payload }, { call, put, select }) {
+    //   let selectedEle = yield select((state) => state[modelName].selectedEle)
+    //   yield put.resolve({
+    //     type: 'getComments',
+    //     payload: {
+    //       object_id: selectedEle.id
+    //     }
+    //   })
+    // },
 
-      let selectedEle = yield select((state) => state[modelName].selectedEle)
-      console.log('selectedEle', selectedEle)
-      yield put.resolve({
-        type: 'getComments',
+    *firstGetComments({ payload }, { call, put, select }) {
+      yield put({
+        type: 'handleChangePageNum',
         payload: {
-          object_id: selectedEle.id
+          pageNum: 1
+        }
+      })
+    },
+
+
+
+    *handleChangePageNum({ payload }, { call, put, select }) {
+      const { pageNum } = payload
+      yield put({
+        type: 'save',
+        payload: {
+          pageNum
         }
       })
 
+      yield put.resolve({
+        type: 'getCommentsUsingState',
+      })
+    },
+
+    *getCommentsUsingState({ payload }, { call, put, select }) {
+      const currentState = yield select(state => state[modelName])
+      const {selectedEle, pageSize, pageNum} = currentState
+
+      yield put.resolve({
+        type: 'getComments',
+        payload: {
+          object_id: selectedEle.id,
+          current_page: pageNum,
+          per_page: pageSize,
+        }
+      })
     },
 
     // 获取评论列表
@@ -89,6 +139,7 @@ const Model = {
           type: 'save',
           payload: {
             comments: response.data.items,
+            total: response.data.total,
           },
         })
       }
@@ -107,7 +158,7 @@ const Model = {
       if (response.status !== 400) {
         // 重新获取评论
         yield put({
-          type: 'getCurrentComments',
+          type: 'firstGetComments',
         })
 
         // 清空表单 or 关闭弹窗
@@ -121,6 +172,21 @@ const Model = {
       }
     },
 
+    // 图片上传成功
+    *successUpload({ payload }, { call, put, select }) {
+      const { new_image } = payload
+
+      // 更新
+      yield put({
+        type: 'updateSelectedEle',
+        payload: {
+          image_url: new_image.url
+        }
+      })
+
+
+    }
+
   },
 
   reducers: {
@@ -130,6 +196,17 @@ const Model = {
         ...action.payload,
       }
     },
+
+    updateSelectedEle(state, action){
+      return {
+        ...state,
+        selectedEle: {
+          ...state.selectedEle,
+          ...action.payload,
+        }
+
+      }
+    }
   },
 }
 export default Model
