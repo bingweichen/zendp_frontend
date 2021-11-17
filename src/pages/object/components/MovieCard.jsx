@@ -40,7 +40,6 @@ export const MovieBigCard = (props) => {
 
 
     <Card style={{marginTop: 20}}>
-      富文本描述
       {object.detail}
     </Card>
 

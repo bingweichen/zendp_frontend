@@ -25,7 +25,7 @@ const GamePage = (props) => {
   useEffect(() => {
     // 获取电影条目
     dispatch({
-      type: 'objects/getObjects',
+      type: 'objects/handleChangeCategory',
       payload: {
         category_name: '游戏',
       },

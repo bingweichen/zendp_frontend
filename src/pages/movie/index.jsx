@@ -21,7 +21,7 @@ const MoviePage = (props) => {
   useEffect(() => {
     // 获取电影条目
     dispatch({
-      type: 'objects/getObjects',
+      type: 'objects/handleChangeCategory',
       payload: {
         category_name: category_name,
       },

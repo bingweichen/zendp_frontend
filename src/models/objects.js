@@ -23,7 +23,7 @@ const ObjectsModel = {
     category_name: '',
 
     // 分页
-    pageSize: 2,
+    pageSize: 20,
     pageNum: 1,
     total: 0,
 
