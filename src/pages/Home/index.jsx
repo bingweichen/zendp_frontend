@@ -59,6 +59,22 @@ const HomePage = () => {
             游戏
           </Card>
 
+          <Card
+            className='center title'
+            style={{ width: 300, height: 200 }}
+            onClick={() => {history.push('/weChatMini')}}
+          >
+            微信小程序
+          </Card>
+
+          <Card
+            className='center title'
+            style={{ width: 300, height: 200 }}
+            onClick={() => {history.push('/other')}}
+          >
+            其他
+          </Card>
+
 
         </Space>
 

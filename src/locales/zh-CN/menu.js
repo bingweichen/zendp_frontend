@@ -56,6 +56,9 @@ export default {
   'menu.rentAgent': "租房中介",
   'menu.music': "音乐",
   'menu.game': "游戏",
+  'menu.weChatMini': "微信小程序",
+  'menu.other': "其他",
+
 
 
 
@@ -64,7 +67,7 @@ export default {
   'menu.addObject': "创建条目",
   'menu.editObject': "编辑条目",
   'menu.searchObject': '搜索条目'
-
+// weChatMini
 
 
 

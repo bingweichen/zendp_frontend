@@ -8,6 +8,7 @@
 export default {
   dev: {
     '/api/': {
+      // target: 'http://www.jxcjxc.com',
       target: 'http://localhost:5000',
       changeOrigin: true,
       pathRewrite: {

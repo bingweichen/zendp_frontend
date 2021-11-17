@@ -101,7 +101,9 @@ export const globalConstant = {
     '电影': 'movie',
     '音乐': 'music',
     '租房中介': 'rentAgent',
-    '游戏': 'game'
+    '游戏': 'game',
+    '微信小程序': 'weChatMini',
+    '其他': 'other'
   }
 }
 

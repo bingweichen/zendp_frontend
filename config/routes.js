@@ -97,6 +97,35 @@ export default [
             hideInMenu: true,
           },
 
+          // 微信小程序
+          {
+            path: "/weChatMini",
+            name: 'weChatMini',
+            icon: 'HomeOutlined',
+            component: './weChatMini/index'
+          },
+          {
+            path: "/weChatMini/objects/:objectId",
+            name: 'objects',
+            component: './object/objectDetailPage',
+            hideInMenu: true,
+          },
+
+          // 其他
+          {
+            path: "/other",
+            name: 'other',
+            icon: 'HomeOutlined',
+            component: './other/index'
+          },
+          {
+            path: "/other/objects/:objectId",
+            name: 'objects',
+            component: './object/objectDetailPage',
+            hideInMenu: true,
+          },
+
+
           // {
           //   path: "/objects/:objectId",
           //   name: 'objects',
